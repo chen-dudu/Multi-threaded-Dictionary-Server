@@ -13,6 +13,7 @@ public class Windows extends JFrame {
 
     private static final int WIDTH  = 350;
     private static final int HEIGHT = 400;
+    private static final String DEFAULT_STATUS = "Status: N/A";
 
     private JTextField searchEntry;
     private JTextField addEntry;
@@ -245,4 +246,17 @@ public class Windows extends JFrame {
     public void setRemoveStatus(String msg) {
         this.removeStatus.setText(msg);
     }
+
+    public void resetSearchStatus() {
+        this.explanation.setText("Meaning: N/A");
+    }
+
+    public void resetAddStatus() {
+        this.addStatus.setText(Windows.DEFAULT_STATUS);
+    }
+
+    public void resetRemoveStatus() {
+        this.removeStatus.setText(Windows.DEFAULT_STATUS);
+    }
+
 }
