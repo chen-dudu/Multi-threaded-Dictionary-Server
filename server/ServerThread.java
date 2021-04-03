@@ -4,6 +4,8 @@
  * Description: This file contains the logic of the thread serving client
  */
 
+package server;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
