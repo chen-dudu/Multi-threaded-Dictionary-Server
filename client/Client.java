@@ -56,6 +56,7 @@ public class Client {
         try {
             while (true) {
                 while (true) {
+                    // this inner inf loop is for waiting user input
                     if (windows.isSearchButtonPressed()) {
                         windows.resetSearchButton();
                         out.write("search\n");
@@ -113,6 +114,7 @@ public class Client {
                                 windows.setRemoveStatus("Word not found in the dictionary");
                                 break;
                         }
+                        // create a new thread and let it sleep for 1s before resetting status info
                         Thread t = new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -120,6 +122,39 @@ public class Client {
                                     Thread.sleep(RESET_TIME);
                                     windows.resetRemoveStatus();
                                 } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        t.start();
+                        break;
+                    }
+                    else if (windows.isUpdateButtonPressed()) {
+                        windows.resetUpdateButton();
+                        out.write("update\n");
+                        out.write(windows.getUpdateQuery() + "\n");
+                        out.write(windows.getMeaningUpdate() + "\n");
+                        out.flush();
+                        int response = Integer.parseInt(in.readLine());
+                        // 0: success
+                        // 1: not found
+                        switch (response) {
+                            case 0:
+                                windows.setUpdateStatus("Success");
+                                break;
+                            case 1:
+                                windows.setUpdateStatus("Word not found in the dictionary");
+                                break;
+                        }
+                        // create a new thread and let it sleep for 1s before resetting status info
+                        Thread t = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(RESET_TIME);
+                                    windows.resetUpdateStatus();
+                                }
+                                catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
                             }
