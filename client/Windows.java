@@ -13,8 +13,13 @@ import java.awt.event.ActionListener;
 
 public class Windows extends JFrame {
 
-    private static final int WIDTH  = 350;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH  = 500;
+    private static final int HEIGHT = 600;
+    private static final int FONT_SIZE = 20;
+    private static final int BUTTON_FONT_SIZE = 17;
+    private static final int FIELD_WIDTH = 150;
+    private static final int FIELD_HEIGHT = 30;
+    private static final int STATUS_WIDTH = 25;
     private static final String DEFAULT_STATUS = "Status: N/A";
 
     private JTextField searchEntry;
@@ -57,16 +62,18 @@ public class Windows extends JFrame {
         w1.setText("Word to search:");
         w1.setName("inputFieldName");
         // change font size
-        w1.setFont(new Font("", Font.PLAIN, 18));
+        w1.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         searchp.add(w1);
 
         searchEntry = new JTextField();
         // change input field box size
-        searchEntry.setPreferredSize(new Dimension(100, 25));
+        searchEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         searchp.add(searchEntry);
 
         search = new JButton();
         search.setText("Search");
+        // change button text font size
+        search.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
         // click listener
         search.addActionListener(new ActionListener() {
             @Override
@@ -77,9 +84,9 @@ public class Windows extends JFrame {
         searchp.add(search);
 
         // use text area to wrap long text
-        explanation = new JTextArea("Meaning: N/A", 0, 18);
+        explanation = new JTextArea("Meaning: N/A", 0, Windows.STATUS_WIDTH);
         // change font size
-        explanation.setFont(new Font("", Font.PLAIN, 18));
+        explanation.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         explanation.setWrapStyleWord(true);
         explanation.setLineWrap(true);
         // disable editing
@@ -104,27 +111,29 @@ public class Windows extends JFrame {
         JLabel w2 = new JLabel();
         w2.setText("Word to add:");
         // change font size
-        w2.setFont(new Font("", Font.PLAIN, 18));
+        w2.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         addpw.add(w2);
 
         addEntry = new JTextField();
         // change input field box size
-        addEntry.setPreferredSize(new Dimension(100, 25));
+        addEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         addpw.add(addEntry);
 
         JLabel m = new JLabel();
         m.setText("Meaning:");
         // change font size
-        m.setFont(new Font("", Font.PLAIN, 18));
+        m.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         addpm.add(m);
 
         meaning = new JTextField();
         // change input field box size
-        meaning.setPreferredSize(new Dimension(100, 25));
+        meaning.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         addpm.add(meaning);
 
         add = new JButton();
         add.setText("Add");
+        // change button text font size
+        add.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
         // click listener
         add.addActionListener(new ActionListener() {
             @Override
@@ -141,9 +150,9 @@ public class Windows extends JFrame {
         addpm.add(add);
 
         // use text area to wrap long text
-        addStatus = new JTextArea("Status: N/A", 0, 18);
+        addStatus = new JTextArea("Status: N/A", 0, Windows.STATUS_WIDTH);
         // change font size
-        addStatus.setFont(new Font("", Font.PLAIN, 18));
+        addStatus.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         addStatus.setWrapStyleWord(true);
         addStatus.setLineWrap(true);
         // disable editing
@@ -168,16 +177,18 @@ public class Windows extends JFrame {
         JLabel w3 = new JLabel();
         w3.setText("Word to remove:");
         // change font size
-        w3.setFont(new Font("", Font.PLAIN, 18));
+        w3.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         removep.add(w3);
 
         removeEntry = new JTextField();
         // change input field box size
-        removeEntry.setPreferredSize(new Dimension(100, 25));
+        removeEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         removep.add(removeEntry);
 
         remove = new JButton();
         remove.setText("Remove");
+        // change button text font size
+        remove.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
         // click listener
         remove.addActionListener(new ActionListener() {
             @Override
@@ -188,9 +199,9 @@ public class Windows extends JFrame {
         removep.add(remove);
 
         // use text area to wrap long text
-        removeStatus = new JTextArea("Status: N/A", 0, 18);
+        removeStatus = new JTextArea("Status: N/A", 0, Windows.STATUS_WIDTH);
         // change font size
-        removeStatus.setFont(new Font("", Font.PLAIN, 18));
+        removeStatus.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         removeStatus.setWrapStyleWord(true);
         removeStatus.setLineWrap(true);
         // disable editing
@@ -215,27 +226,30 @@ public class Windows extends JFrame {
         JLabel w4 = new JLabel();
         w4.setText("Word to update:");
         // change font size
-        w4.setFont(new Font("", Font.PLAIN, 18));
+        w4.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         updatepw.add(w4);
 
         updateEntry = new JTextField();
         // change input field box size
-        updateEntry.setPreferredSize(new Dimension(100, 25));
+        updateEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         updatepw.add(updateEntry);
 
         JLabel m2 = new JLabel();
         m2.setText("New Meaning:");
         // change font size
-        m2.setFont(new Font("", Font.PLAIN, 18));
+        m2.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         updatepm.add(m2);
 
         meaningUpdate = new JTextField();
         // change input field box size
-        meaningUpdate.setPreferredSize(new Dimension(100, 25));
+        meaningUpdate.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         updatepm.add(meaningUpdate);
 
         update = new JButton();
         update.setText("Update");
+        // change button text font size
+        update.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
+        // click listener
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -251,9 +265,9 @@ public class Windows extends JFrame {
         updatepm.add(update);
 
         // use text area to wrap long text
-        updateStatus = new JTextArea("Status: N/A", 0, 18);
+        updateStatus = new JTextArea("Status: N/A", 0, Windows.STATUS_WIDTH);
         // change font size
-        updateStatus.setFont(new Font("", Font.PLAIN, 18));
+        updateStatus.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         updateStatus.setWrapStyleWord(true);
         updateStatus.setLineWrap(true);
         // disable editing
