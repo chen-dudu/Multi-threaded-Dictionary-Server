@@ -21,16 +21,23 @@ public class Windows extends JFrame {
     private JTextField addEntry;
     private JTextField meaning;
     private JTextField removeEntry;
+    private JTextField updateEntry;
+    private JTextField meaningUpdate;
+
     private JButton search;
     private JButton add;
     private JButton remove;
+    private JButton update;
+
     private JTextArea explanation;
     private JTextArea addStatus;
     private JTextArea removeStatus;
+    private JTextArea updateStatus;
 
     private boolean searchButtonPressed = false;
     private boolean addButtonPressed = false;
     private boolean removeButtonPressed = false;
+    private boolean updateButtonPressed = false;
 
     public Windows() {
         super("Dictionary");
@@ -193,6 +200,70 @@ public class Windows extends JFrame {
         add(removep);
         add(removes);
 
+        /* ------------------------------------------------------------------ */
+
+        JSeparator s3 = new JSeparator(SwingConstants.HORIZONTAL);
+        s3.setPreferredSize(new Dimension(Windows.WIDTH, 1));
+        add(s3);
+
+        /* ----------------------------- update ----------------------------- */
+
+        JPanel updatepw = new JPanel();
+        JPanel updatepm = new JPanel();
+        JPanel updateps = new JPanel();
+
+        JLabel w4 = new JLabel();
+        w4.setText("Word to update:");
+        // change font size
+        w4.setFont(new Font("", Font.PLAIN, 18));
+        updatepw.add(w4);
+
+        updateEntry = new JTextField();
+        // change input field box size
+        updateEntry.setPreferredSize(new Dimension(100, 25));
+        updatepw.add(updateEntry);
+
+        JLabel m2 = new JLabel();
+        m2.setText("New Meaning:");
+        // change font size
+        m2.setFont(new Font("", Font.PLAIN, 18));
+        updatepm.add(m2);
+
+        meaningUpdate = new JTextField();
+        // change input field box size
+        meaningUpdate.setPreferredSize(new Dimension(100, 25));
+        updatepm.add(meaningUpdate);
+
+        update = new JButton();
+        update.setText("Update");
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // no meaning is provided for the update
+                if (meaningUpdate.getText().length() == 0) {
+                    updateStatus.setText("Please provide a meaning and try again.");
+                }
+                else {
+                    updateButtonPressed = true;
+                }
+            }
+        });
+        updatepm.add(update);
+
+        // use text area to wrap long text
+        updateStatus = new JTextArea("Status: N/A", 0, 18);
+        // change font size
+        updateStatus.setFont(new Font("", Font.PLAIN, 18));
+        updateStatus.setWrapStyleWord(true);
+        updateStatus.setLineWrap(true);
+        // disable editing
+        updateStatus.setEditable(false);
+        updateps.add(updateStatus);
+
+        add(updatepw);
+        add(updatepm);
+        add(updateps);
+
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
         setVisible(true);
     }
@@ -209,6 +280,10 @@ public class Windows extends JFrame {
         return this.removeButtonPressed;
     }
 
+    public boolean isUpdateButtonPressed() {
+        return this.updateButtonPressed;
+    }
+
     public void resetSearchButton() {
         this.searchButtonPressed = false;
     }
@@ -219,6 +294,10 @@ public class Windows extends JFrame {
 
     public void resetRemoveButton() {
         this.removeButtonPressed = false;
+    }
+
+    public void resetUpdateButton() {
+        this.updateButtonPressed = false;
     }
 
     public String getSearchQuery() {
@@ -237,6 +316,14 @@ public class Windows extends JFrame {
         return this.removeEntry.getText();
     }
 
+    public String getUpdateQuery() {
+        return this.updateEntry.getText();
+    }
+
+    public String getMeaningUpdate() {
+        return this.meaningUpdate.getText();
+    }
+
     public void setSearchResult(String result) {
         this.explanation.setText(result);
     }
@@ -247,6 +334,10 @@ public class Windows extends JFrame {
 
     public void setRemoveStatus(String msg) {
         this.removeStatus.setText(msg);
+    }
+
+    public void setUpdateStatus(String msg) {
+        this.updateStatus.setText(msg);
     }
 
     public void resetSearchStatus() {
@@ -261,4 +352,7 @@ public class Windows extends JFrame {
         this.removeStatus.setText(Windows.DEFAULT_STATUS);
     }
 
+    public void resetUpdateStatus() {
+        this.updateStatus.setText(Windows.DEFAULT_STATUS);
+    }
 }
