@@ -74,6 +74,16 @@ public class ServerThread implements Runnable {
                             response = "1";
                         }
                         break;
+                    case "update":
+                        if (dict.containsKey(query)) {
+                            String newMeaning = in.readLine();
+                            dict.put(query, newMeaning);
+                            response = "0";
+                        }
+                        else {
+                            response = "1";
+                        }
+                        break;
                 }
                 out.write(response + "\n");
                 out.flush();
