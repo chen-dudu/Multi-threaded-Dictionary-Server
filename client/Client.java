@@ -60,7 +60,7 @@ public class Client {
                     if (windows.isSearchButtonPressed()) {
                         windows.resetSearchButton();
                         out.write("search\n");
-                        out.write(windows.getSearchQuery() + "\n");
+                        out.write(windows.getSearchQuery().toLowerCase() + "\n");
                         out.flush();
                         windows.setSearchResult(in.readLine());
                         break;
@@ -68,7 +68,7 @@ public class Client {
                     else if (windows.isAddButtonPressed()) {
                         windows.resetAddButton();
                         out.write("add\n");
-                        out.write(windows.getAddQuery() + "\n");
+                        out.write(windows.getAddQuery().toLowerCase() + "\n");
                         out.write(windows.getMeaning() + "\n");
                         out.flush();
                         int response = Integer.parseInt(in.readLine());
@@ -76,10 +76,10 @@ public class Client {
                         // 1: duplicate
                         switch (response) {
                             case 0:
-                                windows.setAddStatus("Success");
+                                windows.setAddStatus("Success", true);
                                 break;
                             case 1:
-                                windows.setAddStatus("Word already exists");
+                                windows.setAddStatus("Word already exists", false);
                                 break;
                         }
                         // create a new thread and let it sleep for 1s before resetting status info
@@ -100,7 +100,7 @@ public class Client {
                     else if (windows.isRemoveButtonPressed()) {
                         windows.resetRemoveButton();
                         out.write("remove\n");
-                        out.write(windows.getRemoveQuery() + "\n");
+                        out.write(windows.getRemoveQuery().toLowerCase() + "\n");
                         out.flush();
                         windows.resetRemoveStatus();
                         int response = Integer.parseInt(in.readLine());
@@ -108,10 +108,10 @@ public class Client {
                         // 1: not found
                         switch (response) {
                             case 0:
-                                windows.setRemoveStatus("Success");
+                                windows.setRemoveStatus("Success", true);
                                 break;
                             case 1:
-                                windows.setRemoveStatus("Word not found in the dictionary");
+                                windows.setRemoveStatus("Word not found in the dictionary", false);
                                 break;
                         }
                         // create a new thread and let it sleep for 1s before resetting status info
@@ -132,7 +132,7 @@ public class Client {
                     else if (windows.isUpdateButtonPressed()) {
                         windows.resetUpdateButton();
                         out.write("update\n");
-                        out.write(windows.getUpdateQuery() + "\n");
+                        out.write(windows.getUpdateQuery().toLowerCase() + "\n");
                         out.write(windows.getMeaningUpdate() + "\n");
                         out.flush();
                         int response = Integer.parseInt(in.readLine());
@@ -140,10 +140,10 @@ public class Client {
                         // 1: not found
                         switch (response) {
                             case 0:
-                                windows.setUpdateStatus("Success");
+                                windows.setUpdateStatus("Success", true);
                                 break;
                             case 1:
-                                windows.setUpdateStatus("Word not found in the dictionary");
+                                windows.setUpdateStatus("Word not found in the dictionary", false);
                                 break;
                         }
                         // create a new thread and let it sleep for 1s before resetting status info

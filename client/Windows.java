@@ -66,6 +66,8 @@ public class Windows extends JFrame {
         searchp.add(w1);
 
         searchEntry = new JTextField();
+        // change input text font size
+        searchEntry.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         searchEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         searchp.add(searchEntry);
@@ -115,6 +117,8 @@ public class Windows extends JFrame {
         addpw.add(w2);
 
         addEntry = new JTextField();
+        // change input text font size
+        addEntry.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         addEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         addpw.add(addEntry);
@@ -126,6 +130,8 @@ public class Windows extends JFrame {
         addpm.add(m);
 
         meaning = new JTextField();
+        // change input text font size
+        meaning.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         meaning.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         addpm.add(meaning);
@@ -138,9 +144,15 @@ public class Windows extends JFrame {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                // no word is provided
+                if (addEntry.getText().length() == 0) {
+                    addStatus.setText("Please provide a word and try again.");
+                    addStatus.setForeground(Color.RED);
+                }
                 // no meaning is provided for the new word
-                if (meaning.getText().length() == 0) {
+                else if (meaning.getText().length() == 0) {
                     addStatus.setText("Please provide a meaning and try again.");
+                    addStatus.setForeground(Color.RED);
                 }
                 else {
                     addButtonPressed = true;
@@ -181,6 +193,8 @@ public class Windows extends JFrame {
         removep.add(w3);
 
         removeEntry = new JTextField();
+        // change input text font size
+        removeEntry.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         removeEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         removep.add(removeEntry);
@@ -230,6 +244,8 @@ public class Windows extends JFrame {
         updatepw.add(w4);
 
         updateEntry = new JTextField();
+        // change input text font size
+        updateEntry.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         updateEntry.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         updatepw.add(updateEntry);
@@ -241,6 +257,8 @@ public class Windows extends JFrame {
         updatepm.add(m2);
 
         meaningUpdate = new JTextField();
+        // change input text font size
+        meaningUpdate.setFont(new Font("", Font.PLAIN, Windows.FONT_SIZE));
         // change input field box size
         meaningUpdate.setPreferredSize(new Dimension(Windows.FIELD_WIDTH, Windows.FIELD_HEIGHT));
         updatepm.add(meaningUpdate);
@@ -253,9 +271,15 @@ public class Windows extends JFrame {
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // no word is provided
+                if (updateEntry.getText().length() == 0) {
+                    updateStatus.setText("Please provide a word and try again.");
+                    updateStatus.setForeground(Color.RED);
+                }
                 // no meaning is provided for the update
-                if (meaningUpdate.getText().length() == 0) {
+                else if (meaningUpdate.getText().length() == 0) {
                     updateStatus.setText("Please provide a meaning and try again.");
+                    updateStatus.setForeground(Color.RED);
                 }
                 else {
                     updateButtonPressed = true;
@@ -342,31 +366,53 @@ public class Windows extends JFrame {
         this.explanation.setText(result);
     }
 
-    public void setAddStatus(String msg) {
+    public void setAddStatus(String msg, boolean isSuccessful) {
         this.addStatus.setText(msg);
+        if (isSuccessful) {
+            this.addStatus.setForeground(Color.GREEN);
+        }
+        else {
+            this.addStatus.setForeground(Color.RED);
+        }
     }
 
-    public void setRemoveStatus(String msg) {
+    public void setRemoveStatus(String msg, boolean isSuccessful) {
         this.removeStatus.setText(msg);
+        if (isSuccessful) {
+            this.removeStatus.setForeground(Color.GREEN);
+        }
+        else {
+            this.removeStatus.setForeground(Color.RED);
+        }
     }
 
-    public void setUpdateStatus(String msg) {
+    public void setUpdateStatus(String msg, boolean isSuccessful) {
         this.updateStatus.setText(msg);
+        if (isSuccessful) {
+            this.updateStatus.setForeground(Color.GREEN);
+        }
+        else {
+            this.updateStatus.setForeground(Color.RED);
+        }
     }
 
     public void resetSearchStatus() {
         this.explanation.setText("Meaning: N/A");
+        this.explanation.setForeground(Color.BLACK);
     }
 
     public void resetAddStatus() {
         this.addStatus.setText(Windows.DEFAULT_STATUS);
+        this.addStatus.setForeground(Color.BLACK);
     }
 
     public void resetRemoveStatus() {
         this.removeStatus.setText(Windows.DEFAULT_STATUS);
+        this.removeStatus.setForeground(Color.BLACK);
     }
 
     public void resetUpdateStatus() {
         this.updateStatus.setText(Windows.DEFAULT_STATUS);
+        this.updateStatus.setForeground(Color.BLACK);
     }
 }
