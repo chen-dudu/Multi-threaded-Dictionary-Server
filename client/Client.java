@@ -58,19 +58,19 @@ public class Client {
                 while (true) {
                     // this inner inf loop is for waiting user input
                     if (windows.isSearchButtonPressed()) {
-                        windows.resetSearchButton();
                         out.write("search\n");
                         out.write(windows.getSearchQuery().toLowerCase() + "\n");
                         out.flush();
+                        windows.resetSearchButton();
                         windows.setSearchResult(in.readLine());
                         break;
                     }
                     else if (windows.isAddButtonPressed()) {
-                        windows.resetAddButton();
                         out.write("add\n");
                         out.write(windows.getAddQuery().toLowerCase() + "\n");
                         out.write(windows.getMeaning() + "\n");
                         out.flush();
+                        windows.resetAddButton();
                         int response = Integer.parseInt(in.readLine());
                         // 0: success
                         // 1: duplicate
@@ -98,10 +98,10 @@ public class Client {
                         break;
                     }
                     else if (windows.isRemoveButtonPressed()) {
-                        windows.resetRemoveButton();
                         out.write("remove\n");
                         out.write(windows.getRemoveQuery().toLowerCase() + "\n");
                         out.flush();
+                        windows.resetRemoveButton();
                         windows.resetRemoveStatus();
                         int response = Integer.parseInt(in.readLine());
                         // 0: success
@@ -130,11 +130,11 @@ public class Client {
                         break;
                     }
                     else if (windows.isUpdateButtonPressed()) {
-                        windows.resetUpdateButton();
                         out.write("update\n");
                         out.write(windows.getUpdateQuery().toLowerCase() + "\n");
                         out.write(windows.getMeaningUpdate() + "\n");
                         out.flush();
+                        windows.resetUpdateButton();
                         int response = Integer.parseInt(in.readLine());
                         // 0: success
                         // 1: not found
@@ -169,7 +169,19 @@ public class Client {
         }
         catch (IOException ioe) {
             System.err.println("System failed to read /send data from/to socket stream.");
-            return;
+            String msg = "Server is lost";
+            if (windows.isSearchButtonPressed()) {
+                windows.setSearchResult(msg);
+            }
+            else if (windows.isAddButtonPressed()) {
+                windows.setAddStatus(msg, false);
+            }
+            else if (windows.isRemoveButtonPressed()) {
+                windows.setRemoveStatus(msg, false);
+            }
+            else if (windows.isUpdateButtonPressed()) {
+                windows.setUpdateStatus(msg, false);
+            }
         }
         finally {
             if (s != null) {
