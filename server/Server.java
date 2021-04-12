@@ -16,9 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Server {
 
-    // number of threads in the pool
-    public static final int NUM_THREADS = 4;
-
     public static void main(String[] args) {
 
         if (args.length < 2) {
@@ -89,6 +86,7 @@ public class Server {
                 client = server.accept();
             }
             catch (SocketException se) {
+                // capture the exception when server socket is being closed
                 System.out.println("Server has been shut down.\n");
                 break;
             }
@@ -102,21 +100,17 @@ public class Server {
             // get a thread from the pool and assign the newly connected client to it
             pool.execute(new ServerThread(client, dict));
         }
-        System.out.println("sssssss");
         // destroy the thread pool
         pool.shutdown();
         try {
-            System.out.println("111111");
             if (!pool.awaitTermination(1000, TimeUnit.MILLISECONDS)) {
-                System.out.println("22222");
                 pool.shutdownNow();
-                System.out.println("33333");
             }
         }
         catch (InterruptedException e) {
             System.err.println("System failed to clsoe the thread pool.\n");
         }
-        System.out.println("44444");
+        // close the program
         System.exit(0);
     }
 }
