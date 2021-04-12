@@ -8,9 +8,11 @@ package server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Server {
 
@@ -67,7 +69,17 @@ public class Server {
             return;
         }
 
-        ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);
+        Windows window = new Windows(server);
+
+        // keep waiting until the launch button is pressed
+        while(!window.isLaunchButtonPressed()) {
+            // this line is to suppress the compiler optimisation of skipping empty loop
+            System.out.println();
+        }
+
+        int numThread = window.getConcurrentUser();
+
+        ExecutorService pool = Executors.newFixedThreadPool(numThread);
 
         // an inf loop to keep the server online
         while (true) {
@@ -75,6 +87,10 @@ public class Server {
             Socket client;
             try {
                 client = server.accept();
+            }
+            catch (SocketException se) {
+                System.out.println("Server has been shut down.\n");
+                break;
             }
             catch (IOException ioe) {
                 System.err.println("System failed to connect to client.\n");
@@ -86,5 +102,21 @@ public class Server {
             // get a thread from the pool and assign the newly connected client to it
             pool.execute(new ServerThread(client, dict));
         }
+        System.out.println("sssssss");
+        // destroy the thread pool
+        pool.shutdown();
+        try {
+            System.out.println("111111");
+            if (!pool.awaitTermination(1000, TimeUnit.MILLISECONDS)) {
+                System.out.println("22222");
+                pool.shutdownNow();
+                System.out.println("33333");
+            }
+        }
+        catch (InterruptedException e) {
+            System.err.println("System failed to clsoe the thread pool.\n");
+        }
+        System.out.println("44444");
+        System.exit(0);
     }
 }
