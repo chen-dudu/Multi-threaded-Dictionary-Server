@@ -1,6 +1,5 @@
 .idea
 out
 *.class
-*.jar
 client/META-INF
 server/META-INF
