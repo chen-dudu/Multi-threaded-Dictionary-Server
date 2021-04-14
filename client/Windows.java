@@ -363,7 +363,16 @@ public class Windows extends JFrame {
     }
 
     public void setSearchResult(String result) {
-        this.explanation.setText(result);
+        int len = result.length();
+        if (len == 0) {
+            // no match found in the server
+            this.explanation.setText("No match result");
+            this.explanation.setForeground(Color.RED);
+        }
+        else {
+            this.explanation.setText(result);
+            this.explanation.setForeground(Color.GREEN);
+        }
     }
 
     public void setAddStatus(String msg, boolean isSuccessful) {

@@ -53,7 +53,7 @@ public class ServerThread implements Runnable {
                 switch (operation) {
                     case "search":
                         String result = dict.get(query);
-                        response = result == null ? "No match result" : result;
+                        response = result == null ? "" : result;
                         break;
                     case "add":
                         if (dict.containsKey(query)) {
