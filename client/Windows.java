@@ -35,6 +35,7 @@ public class Windows extends JFrame {
     private JButton add;
     private JButton remove;
     private JButton update;
+    private JButton shutdown;
 
     private JTextArea explanation;
     private JTextArea addStatus;
@@ -45,6 +46,7 @@ public class Windows extends JFrame {
     private boolean addButtonPressed = false;
     private boolean removeButtonPressed = false;
     private boolean updateButtonPressed = false;
+    private boolean shutdownButtonPressed = false;
 
     public Windows() {
         super("Dictionary");
@@ -303,6 +305,27 @@ public class Windows extends JFrame {
         add(updatepw);
         add(updatepm);
         add(updateps);
+
+        /* ------------------------------------------------------------------ */
+
+        JSeparator s4 = new JSeparator(SwingConstants.HORIZONTAL);
+        s4.setPreferredSize(new Dimension(Windows.WIDTH, 1));
+        add(s4);
+
+        /* ---------------------------- shutdown ---------------------------- */
+
+        shutdown = new JButton();
+        shutdown.setText("Close Connection");
+        // change button text font size
+        shutdown.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
+        // click listener
+        shutdown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shutdownButtonPressed = true;
+            }
+        });
+        add(shutdown);
 
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
         setVisible(true);
