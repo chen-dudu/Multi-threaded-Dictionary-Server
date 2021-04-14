@@ -12,9 +12,6 @@ import java.nio.charset.StandardCharsets;
 
 public class Client {
 
-    // this is the survival time of status information
-    private static final long RESET_TIME = 2000L;
-
     public static void main(String[] args) {
 
         if (args.length < 2) {
@@ -82,19 +79,7 @@ public class Client {
                                 windows.setAddStatus("Word already exists", false);
                                 break;
                         }
-                        // create a new thread and let it sleep for 1s before resetting status info
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(RESET_TIME);
-                                    windows.resetAddStatus();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        t.start();
+                        windows.resetAddStatus();
                         break;
                     }
                     else if (windows.isRemoveButtonPressed()) {
@@ -114,19 +99,7 @@ public class Client {
                                 windows.setRemoveStatus("Word not found in the dictionary", false);
                                 break;
                         }
-                        // create a new thread and let it sleep for 1s before resetting status info
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(RESET_TIME);
-                                    windows.resetRemoveStatus();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        t.start();
+                        windows.resetRemoveStatus();
                         break;
                     }
                     else if (windows.isUpdateButtonPressed()) {
@@ -146,20 +119,7 @@ public class Client {
                                 windows.setUpdateStatus("Word not found in the dictionary", false);
                                 break;
                         }
-                        // create a new thread and let it sleep for 1s before resetting status info
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(RESET_TIME);
-                                    windows.resetUpdateStatus();
-                                }
-                                catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        t.start();
+                        windows.resetUpdateStatus();
                         break;
                     }
                     // this line is to suppress the compiler optimisation of skipping empty loop

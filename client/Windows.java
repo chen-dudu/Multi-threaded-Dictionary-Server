@@ -21,6 +21,8 @@ public class Windows extends JFrame {
     private static final int FIELD_HEIGHT = 30;
     private static final int STATUS_WIDTH = 25;
     private static final String DEFAULT_STATUS = "Status: N/A";
+    // this is the survival time of status information
+    private static final long RESET_TIME = 2000L;
 
     private JTextField searchEntry;
     private JTextField addEntry;
@@ -406,22 +408,78 @@ public class Windows extends JFrame {
     }
 
     public void resetSearchStatus() {
-        this.explanation.setText("Meaning: N/A");
-        this.explanation.setForeground(Color.BLACK);
+        // create a new thread and let it sleep for 1s before resetting status info
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(Windows.RESET_TIME);
+                    explanation.setText("Meaning: N/A");
+                    explanation.setForeground(Color.BLACK);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
     }
 
     public void resetAddStatus() {
-        this.addStatus.setText(Windows.DEFAULT_STATUS);
-        this.addStatus.setForeground(Color.BLACK);
+        // create a new thread and let it sleep for 1s before resetting status info
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(Windows.RESET_TIME);
+                    addStatus.setText(Windows.DEFAULT_STATUS);
+                    addStatus.setForeground(Color.BLACK);
+                    addEntry.setText("");
+                    meaning.setText("");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
     }
 
     public void resetRemoveStatus() {
-        this.removeStatus.setText(Windows.DEFAULT_STATUS);
-        this.removeStatus.setForeground(Color.BLACK);
+        // create a new thread and let it sleep for 1s before resetting status info
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(Windows.RESET_TIME);
+                    removeStatus.setText(Windows.DEFAULT_STATUS);
+                    removeStatus.setForeground(Color.BLACK);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
     }
 
     public void resetUpdateStatus() {
-        this.updateStatus.setText(Windows.DEFAULT_STATUS);
-        this.updateStatus.setForeground(Color.BLACK);
+        // create a new thread and let it sleep for 1s before resetting status info
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(Windows.RESET_TIME);
+                    updateStatus.setText(Windows.DEFAULT_STATUS);
+                    updateStatus.setForeground(Color.BLACK);
+                    updateEntry.setText("");
+                    meaningUpdate.setText("");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
     }
 }
