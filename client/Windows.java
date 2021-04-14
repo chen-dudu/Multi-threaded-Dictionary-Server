@@ -347,6 +347,10 @@ public class Windows extends JFrame {
         return this.updateButtonPressed;
     }
 
+    public boolean isShutdownButtonPressed() {
+        return shutdownButtonPressed;
+    }
+
     public void resetSearchButton() {
         this.searchButtonPressed = false;
     }
@@ -361,6 +365,10 @@ public class Windows extends JFrame {
 
     public void resetUpdateButton() {
         this.updateButtonPressed = false;
+    }
+
+    public void resetShutdownButton() {
+        this.shutdownButtonPressed = false;
     }
 
     public String getSearchQuery() {
