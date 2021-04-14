@@ -51,6 +51,10 @@ public class RequestTask implements Runnable {
                 String query = in.readLine();
                 String newMeaning;
                 String response = null;
+                // client closing the connection will cause a NULL to be read from the input stream
+                if (operation == null) {
+                    throw new IOException();
+                }
                 switch (operation) {
                     case "search":
                         String result = dict.get(query);
