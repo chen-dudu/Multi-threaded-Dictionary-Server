@@ -122,6 +122,17 @@ public class Client {
                         windows.resetUpdateStatus();
                         break;
                     }
+                    else if (windows.isShutdownButtonPressed()) {
+                        if (s != null) {
+                            try {
+                                s.close();
+                            }
+                            catch (IOException ioe) {
+                                System.err.println("System failed when trying to close the socket.");
+                            }
+                        }
+                        System.exit(0);
+                    }
                     // this line is to suppress the compiler optimisation of skipping empty loop
                     System.out.println("");
                 }
