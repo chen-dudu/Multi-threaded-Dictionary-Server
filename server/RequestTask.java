@@ -1,7 +1,7 @@
 /**
  * Author: Liguo Chen
  * Student ID: 851090
- * Description: This file contains the logic of the thread serving client
+ * Description: This file contains the logic of a request task
  */
 
 package server;
@@ -11,12 +11,12 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
-public class ServerThread implements Runnable {
+public class RequestTask implements Runnable {
 
     private Socket client;
     private HashMap<String, String> dict;
 
-    public ServerThread(Socket client, HashMap<String, String> dict) {
+    public RequestTask(Socket client, HashMap<String, String> dict) {
         this.client = client;
         this.dict = dict;
     }
@@ -49,6 +49,7 @@ public class ServerThread implements Runnable {
             try {
                 String operation = in.readLine();
                 String query = in.readLine();
+                String newMeaning;
                 String response = null;
                 switch (operation) {
                     case "search":
@@ -56,11 +57,11 @@ public class ServerThread implements Runnable {
                         response = result == null ? "" : result;
                         break;
                     case "add":
+                        newMeaning = in.readLine();
                         if (dict.containsKey(query)) {
                             response = "1";
                         }
                         else {
-                            String newMeaning = in.readLine();
                             dict.put(query, newMeaning);
                             response = "0";
                         }
@@ -75,8 +76,8 @@ public class ServerThread implements Runnable {
                         }
                         break;
                     case "update":
+                        newMeaning = in.readLine();
                         if (dict.containsKey(query)) {
-                            String newMeaning = in.readLine();
                             dict.put(query, newMeaning);
                             response = "0";
                         }

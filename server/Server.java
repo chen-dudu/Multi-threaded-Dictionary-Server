@@ -98,7 +98,7 @@ public class Server {
             System.out.println("Connected to a client.\n");
 
             // get a thread from the pool and assign the newly connected client to it
-            pool.execute(new ServerThread(client, dict));
+            pool.execute(new RequestTask(client, dict));
         }
         // destroy the thread pool
         pool.shutdown();
