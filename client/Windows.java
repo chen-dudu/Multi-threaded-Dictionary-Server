@@ -1,7 +1,7 @@
 /**
  * Author: Liguo Chen
  * Student ID: 851090
- * Description: This file contains the logic of the GUI
+ * Description: This file contains the logic of the client GUI
  */
 
 package client;
