@@ -14,6 +14,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
 public class Server {
 
     public static void main(String[] args) {
@@ -34,26 +37,24 @@ public class Server {
 
         HashMap<String, String> dict = new HashMap<>();
 
-//        try {
-        // prepare the dictionary to be used for reply requests
-        BufferedReader reader;
+        // parse the json file containing initial words
+        JSONParser parser = new JSONParser();
+        JSONArray words;
         try {
-            reader = new BufferedReader(new InputStreamReader(new FileInputStream(dictFile)));
+            words = (JSONArray) parser.parse(new FileReader(dictFile));
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException fe) {
             System.err.println("The provided dictionary file " + dictFile + " cannot be found.\n");
             return;
         }
-        String word, meaning;
-        try {
-            while ((word = reader.readLine()) != null) {
-                meaning = reader.readLine();
-                dict.put(word.toLowerCase(), meaning);
-            }
-        }
-        catch (IOException ioe) {
-            System.out.println("System failed to process the provided dictionary file.\n");
+        catch (Exception e) {
+            System.err.println("System failed to process the provided dictionary file.\n");
             return;
+        }
+
+        for (Object object: words) {
+            JSONObject word = (JSONObject) object;
+            dict.put(word.get("word").toString(), word.get("meaning").toString());
         }
 
         // create a server socket
