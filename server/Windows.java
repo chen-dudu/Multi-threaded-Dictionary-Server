@@ -72,6 +72,8 @@ public class Windows extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 launchButtonPressed = true;
+                launch.setEnabled(false);
+                shutdown.setEnabled(true);
             }
         });
         p2.add(launch);
@@ -90,6 +92,7 @@ public class Windows extends JFrame {
         JPanel p3 = new JPanel();
 
         shutdown = new JButton();
+        shutdown.setEnabled(false);
         shutdown.setText("Close Server");
         // change button text font size
         shutdown.setFont(new Font("", Font.PLAIN, Windows.BUTTON_FONT_SIZE));
