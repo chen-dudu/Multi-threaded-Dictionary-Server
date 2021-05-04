@@ -1,5 +1,19 @@
 # Multi-thread Dictionary Server
 
+## System Description
+The overall system has a client-server architecture.  
+
+### Server
+The server supports concurrent users to search meaning(s) of a word, 
+add a new word, and remove an existing word.
+
+A GUI is implemented to manage the server, e.g. launch/shut down server, set
+the max numbers of concurrent users
+
+### Client
+The client uses the implemented GUI to perform all the operations that the server 
+supports, as mentioned above.
+
 ## Execution
 ### To run the server
 ```
